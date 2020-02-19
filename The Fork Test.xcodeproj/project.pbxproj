@@ -8,13 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		6CC376FE23FDADA000191795 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC376FD23FDADA000191795 /* AppDelegate.swift */; };
-		6CC3770023FDADA000191795 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC376FF23FDADA000191795 /* SceneDelegate.swift */; };
-		6CC3770223FDADA000191795 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3770123FDADA000191795 /* ViewController.swift */; };
-		6CC3770523FDADA000191795 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CC3770323FDADA000191795 /* Main.storyboard */; };
 		6CC3770723FDADA600191795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CC3770623FDADA600191795 /* Assets.xcassets */; };
 		6CC3770A23FDADA600191795 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CC3770823FDADA600191795 /* LaunchScreen.storyboard */; };
 		6CC3771523FDADA600191795 /* The_Fork_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3771423FDADA600191795 /* The_Fork_TestTests.swift */; };
 		6CC3772023FDADA600191795 /* The_Fork_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3771F23FDADA600191795 /* The_Fork_TestUITests.swift */; };
+		6CC3772E23FDAE9200191795 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3772D23FDAE9200191795 /* RestaurantsViewController.swift */; };
+		6CC3775023FDB0CD00191795 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773223FDB0CA00191795 /* Tag.swift */; };
+		6CC3775223FDB0CD00191795 /* PicturesMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773423FDB0CA00191795 /* PicturesMain.swift */; };
+		6CC3775423FDB0CD00191795 /* HighlightedTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773623FDB0CA00191795 /* HighlightedTag.swift */; };
+		6CC3775823FDB0CD00191795 /* RestaurantTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773A23FDB0CA00191795 /* RestaurantTags.swift */; };
+		6CC3775B23FDB0CD00191795 /* Ratings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773D23FDB0CB00191795 /* Ratings.swift */; };
+		6CC3775D23FDB0CD00191795 /* JSONSchemaSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3773F23FDB0CB00191795 /* JSONSchemaSupport.swift */; };
+		6CC3775E23FDB0CD00191795 /* RestaurantTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774023FDB0CB00191795 /* RestaurantTag.swift */; };
+		6CC3775F23FDB0CD00191795 /* RestaurantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774123FDB0CB00191795 /* RestaurantData.swift */; };
+		6CC3776123FDB0CD00191795 /* MichelinDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774323FDB0CB00191795 /* MichelinDetail.swift */; };
+		6CC3776223FDB0CD00191795 /* TagList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774423FDB0CB00191795 /* TagList.swift */; };
+		6CC3776423FDB0CD00191795 /* Menus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774623FDB0CC00191795 /* Menus.swift */; };
+		6CC3776523FDB0CD00191795 /* YumsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774723FDB0CC00191795 /* YumsDetail.swift */; };
+		6CC3776623FDB0CD00191795 /* RestaurantResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774823FDB0CC00191795 /* RestaurantResult.swift */; };
+		6CC3776D23FDB0CD00191795 /* PicturesDiaporama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3774F23FDB0CD00191795 /* PicturesDiaporama.swift */; };
+		6CC3777123FDB76000191795 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC3777023FDB76000191795 /* NetworkAPI.swift */; };
+		6CC9AC0D23FDBF850000D084 /* RestaurantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC9AC0C23FDBF850000D084 /* RestaurantCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +51,6 @@
 /* Begin PBXFileReference section */
 		6CC376FA23FDAD9F00191795 /* The Fork Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Fork Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC376FD23FDADA000191795 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6CC376FF23FDADA000191795 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6CC3770123FDADA000191795 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6CC3770423FDADA000191795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6CC3770623FDADA600191795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6CC3770923FDADA600191795 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CC3770B23FDADA600191795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +60,23 @@
 		6CC3771B23FDADA600191795 /* The Fork TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Fork TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CC3771F23FDADA600191795 /* The_Fork_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Fork_TestUITests.swift; sourceTree = "<group>"; };
 		6CC3772123FDADA600191795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6CC3772D23FDAE9200191795 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
+		6CC3773223FDB0CA00191795 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		6CC3773423FDB0CA00191795 /* PicturesMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturesMain.swift; sourceTree = "<group>"; };
+		6CC3773623FDB0CA00191795 /* HighlightedTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightedTag.swift; sourceTree = "<group>"; };
+		6CC3773A23FDB0CA00191795 /* RestaurantTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTags.swift; sourceTree = "<group>"; };
+		6CC3773D23FDB0CB00191795 /* Ratings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ratings.swift; sourceTree = "<group>"; };
+		6CC3773F23FDB0CB00191795 /* JSONSchemaSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSchemaSupport.swift; sourceTree = "<group>"; };
+		6CC3774023FDB0CB00191795 /* RestaurantTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantTag.swift; sourceTree = "<group>"; };
+		6CC3774123FDB0CB00191795 /* RestaurantData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantData.swift; sourceTree = "<group>"; };
+		6CC3774323FDB0CB00191795 /* MichelinDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MichelinDetail.swift; sourceTree = "<group>"; };
+		6CC3774423FDB0CB00191795 /* TagList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagList.swift; sourceTree = "<group>"; };
+		6CC3774623FDB0CC00191795 /* Menus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menus.swift; sourceTree = "<group>"; };
+		6CC3774723FDB0CC00191795 /* YumsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YumsDetail.swift; sourceTree = "<group>"; };
+		6CC3774823FDB0CC00191795 /* RestaurantResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantResult.swift; sourceTree = "<group>"; };
+		6CC3774F23FDB0CD00191795 /* PicturesDiaporama.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturesDiaporama.swift; sourceTree = "<group>"; };
+		6CC3777023FDB76000191795 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		6CC9AC0C23FDBF850000D084 /* RestaurantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +128,10 @@
 			isa = PBXGroup;
 			children = (
 				6CC376FD23FDADA000191795 /* AppDelegate.swift */,
-				6CC376FF23FDADA000191795 /* SceneDelegate.swift */,
-				6CC3770123FDADA000191795 /* ViewController.swift */,
-				6CC3770323FDADA000191795 /* Main.storyboard */,
+				6CC3777023FDB76000191795 /* NetworkAPI.swift */,
+				6CC3773123FDB0BD00191795 /* Model */,
+				6CC3773023FDAEC400191795 /* Controllers */,
+				6CC9AC0E23FDBF910000D084 /* Cells */,
 				6CC3770623FDADA600191795 /* Assets.xcassets */,
 				6CC3770823FDADA600191795 /* LaunchScreen.storyboard */,
 				6CC3770B23FDADA600191795 /* Info.plist */,
@@ -126,6 +155,43 @@
 				6CC3772123FDADA600191795 /* Info.plist */,
 			);
 			path = "The Fork TestUITests";
+			sourceTree = "<group>";
+		};
+		6CC3773023FDAEC400191795 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6CC3772D23FDAE9200191795 /* RestaurantsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6CC3773123FDB0BD00191795 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6CC3774823FDB0CC00191795 /* RestaurantResult.swift */,
+				6CC3774123FDB0CB00191795 /* RestaurantData.swift */,
+				6CC3773A23FDB0CA00191795 /* RestaurantTags.swift */,
+				6CC3774023FDB0CB00191795 /* RestaurantTag.swift */,
+				6CC3774423FDB0CB00191795 /* TagList.swift */,
+				6CC3773223FDB0CA00191795 /* Tag.swift */,
+				6CC3773423FDB0CA00191795 /* PicturesMain.swift */,
+				6CC3774F23FDB0CD00191795 /* PicturesDiaporama.swift */,
+				6CC3773623FDB0CA00191795 /* HighlightedTag.swift */,
+				6CC3774623FDB0CC00191795 /* Menus.swift */,
+				6CC3774323FDB0CB00191795 /* MichelinDetail.swift */,
+				6CC3773D23FDB0CB00191795 /* Ratings.swift */,
+				6CC3774723FDB0CC00191795 /* YumsDetail.swift */,
+				6CC3773F23FDB0CB00191795 /* JSONSchemaSupport.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6CC9AC0E23FDBF910000D084 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6CC9AC0C23FDBF850000D084 /* RestaurantCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,7 +300,6 @@
 			files = (
 				6CC3770A23FDADA600191795 /* LaunchScreen.storyboard in Resources */,
 				6CC3770723FDADA600191795 /* Assets.xcassets in Resources */,
-				6CC3770523FDADA000191795 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +324,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6CC3770223FDADA000191795 /* ViewController.swift in Sources */,
+				6CC3776623FDB0CD00191795 /* RestaurantResult.swift in Sources */,
+				6CC3776523FDB0CD00191795 /* YumsDetail.swift in Sources */,
+				6CC3775F23FDB0CD00191795 /* RestaurantData.swift in Sources */,
+				6CC3776D23FDB0CD00191795 /* PicturesDiaporama.swift in Sources */,
+				6CC3776223FDB0CD00191795 /* TagList.swift in Sources */,
+				6CC3775D23FDB0CD00191795 /* JSONSchemaSupport.swift in Sources */,
+				6CC3775223FDB0CD00191795 /* PicturesMain.swift in Sources */,
+				6CC3772E23FDAE9200191795 /* RestaurantsViewController.swift in Sources */,
+				6CC9AC0D23FDBF850000D084 /* RestaurantCell.swift in Sources */,
+				6CC3775E23FDB0CD00191795 /* RestaurantTag.swift in Sources */,
+				6CC3776123FDB0CD00191795 /* MichelinDetail.swift in Sources */,
+				6CC3777123FDB76000191795 /* NetworkAPI.swift in Sources */,
+				6CC3776423FDB0CD00191795 /* Menus.swift in Sources */,
+				6CC3775823FDB0CD00191795 /* RestaurantTags.swift in Sources */,
+				6CC3775423FDB0CD00191795 /* HighlightedTag.swift in Sources */,
 				6CC376FE23FDADA000191795 /* AppDelegate.swift in Sources */,
-				6CC3770023FDADA000191795 /* SceneDelegate.swift in Sources */,
+				6CC3775B23FDB0CD00191795 /* Ratings.swift in Sources */,
+				6CC3775023FDB0CD00191795 /* Tag.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +377,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6CC3770323FDADA000191795 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6CC3770423FDADA000191795 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6CC3770823FDADA600191795 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,7 +438,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +492,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -437,6 +509,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33VGWYZGV4;
 				INFOPLIST_FILE = "The Fork Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +528,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 33VGWYZGV4;
 				INFOPLIST_FILE = "The Fork Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
