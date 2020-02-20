@@ -10,10 +10,12 @@ import UIKit
 
 struct Style {
     
+    static let theForkGreenColor = UIColor(red: 0.306, green: 0.537, blue: 0.227, alpha: 1.0)
+    
     struct Restaurants {
         static let tintColor = UIColor.white
-        static let barTintColor = UIColor(red: 0.306, green: 0.537, blue: 0.227, alpha: 1.0)
-        static let backgroundColor = UIColor(red: 0.306, green: 0.537, blue: 0.227, alpha: 1.0)
+        static let barTintColor = theForkGreenColor
+        static let backgroundColor = theForkGreenColor
         static let prefersLargeTitle = true
         
         @available(iOS 13.0, *)

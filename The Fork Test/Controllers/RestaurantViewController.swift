@@ -28,6 +28,18 @@ class RestaurantViewController: UIViewController {
         return view
     }()
     
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 3000)
+        view.backgroundColor = .red
+        view.delegate = self
+        return view
+    }()
+    
+    internal let baseSliderHeight: CGFloat = 300
+    var sliderHeightConstraint: NSLayoutConstraint?
+    
     var isFavourite: Bool = false
     
     let restaurant: RestaurantData
@@ -91,13 +103,29 @@ class RestaurantViewController: UIViewController {
         view.addSubview(self.slider.view)
         self.slider.didMove(toParent: self)
         
+        self.view.addSubview(self.scrollView)
+        
+        
         if let sliderView = slider.view {
-            NSLayoutConstraint.activate([
+            
+            sliderHeightConstraint = NSLayoutConstraint(item: sliderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: baseSliderHeight)
+            
+            var constraints = [
                 NSLayoutConstraint(item: sliderView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: sliderView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: sliderView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: sliderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 300)
-            ])
+                
+                NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: sliderView, attribute: .bottom, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
+            ]
+            
+            if let constraint = sliderHeightConstraint {
+                constraints.append(constraint)
+            }
+            
+            NSLayoutConstraint.activate(constraints)
         }
     }
     
@@ -114,5 +142,23 @@ class RestaurantViewController: UIViewController {
             image = UIImage(named: "Heart")
         }
         self.favoriteButton.image = image?.imageForNavigationBar()
+    }
+}
+
+extension RestaurantViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetHeight = scrollView.contentOffset.y
+        let correctedOffsetHeight = offsetHeight / 4
+        let newSliderHeight: CGFloat
+        
+        if correctedOffsetHeight < 200 {
+            newSliderHeight = baseSliderHeight - correctedOffsetHeight
+        } else {
+            newSliderHeight = 100
+        }
+        self.sliderHeightConstraint?.constant = newSliderHeight
+        
+        let percentage: Double = Double(correctedOffsetHeight) < 200 ? Double(correctedOffsetHeight) / 200 : 1.0
+        self.slider.obfusced(percentage: percentage)
     }
 }

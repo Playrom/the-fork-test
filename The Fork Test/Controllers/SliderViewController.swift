@@ -13,7 +13,7 @@ class SliderViewController: UIPageViewController {
     let opaqueLayerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = Style.theForkGreenColor
         view.alpha = 0.35
         view.isUserInteractionEnabled = false
         return view
@@ -97,6 +97,12 @@ class SliderViewController: UIPageViewController {
             ])
         }
 
+    }
+    
+    func obfusced(percentage: Double) {
+        self.opaqueLayerView.alpha = CGFloat(0.35) + ( CGFloat(0.65) * CGFloat(percentage) )
+        self.titleLabel.alpha = CGFloat(1) - CGFloat(percentage)
+        self.pageControl.alpha = CGFloat(1) - CGFloat(percentage)
     }
 }
 

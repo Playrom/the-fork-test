@@ -100,6 +100,7 @@ class RestaurantsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurant = self.restaurants[indexPath.row]
         let vc = RestaurantViewController(restaurant: restaurant)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
