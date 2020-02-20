@@ -15,8 +15,9 @@ class RestaurantCell: UITableViewCell {
         var name: String
         var type: String
         var ratings: String
-        var isFavourite: Bool = false
     }
+    
+    private var model: ViewModel?
     
     let avatarImageView: UIImageView = {
         let view = UIImageView(frame: .zero)
@@ -46,14 +47,6 @@ class RestaurantCell: UITableViewCell {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .preferredFont(forTextStyle: .subheadline)
-        return view
-    }()
-    
-    let favoriteImageView: UIImageView = {
-        let view = UIImageView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentMode = .scaleAspectFit
-        view.tintColor = .red
         return view
     }()
     
@@ -95,7 +88,6 @@ class RestaurantCell: UITableViewCell {
         
         mainStack.addArrangedSubview(avatarImageView)
         mainStack.addArrangedSubview(infoStack)
-        mainStack.addArrangedSubview(favoriteImageView)
         
         self.contentView.addSubview(mainStack)
         
@@ -104,27 +96,23 @@ class RestaurantCell: UITableViewCell {
             NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 92),
             
             NSLayoutConstraint(item: mainStack, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 4),
-            NSLayoutConstraint(item: mainStack, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1, constant: -8),
+            NSLayoutConstraint(item: mainStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -8),
             NSLayoutConstraint(item: mainStack, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: mainStack, attribute: .left, relatedBy: .equal, toItem: contentView, attribute: .left, multiplier: 1, constant: 4),
-            
-            NSLayoutConstraint(item: favoriteImageView, attribute: .width, relatedBy: .equal, toItem: favoriteImageView, attribute: .height, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: favoriteImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30),
+            NSLayoutConstraint(item: mainStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 4),
         ])
     }
     
     func setup(with model: ViewModel) {
+        self.model = model
         self.nameLabel.text = model.name
         self.typeLabel.text = model.type
         self.ratingsLabel.text = model.ratings
-        self.avatarImageView.image = model.avatarImage
-        
-        if model.isFavourite {
-            let image = UIImage(named: "Heart Filled")
-            self.favoriteImageView.image = image
+        if let image = model.avatarImage {
+            self.avatarImageView.backgroundColor = .clear
+            self.avatarImageView.image = image
         } else {
-            let image = UIImage(named: "Heart")
-            self.favoriteImageView.image = image
+            self.avatarImageView.backgroundColor = .gray
+            self.avatarImageView.image = nil
         }
     }
 }

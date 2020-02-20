@@ -10,6 +10,7 @@ import UIKit
 
 class NetworkAPI {
     private let session: URLSession
+    private let imagesCache: [URL: UIImage] = [:]
     
     init() {
         self.session = URLSession.shared
@@ -47,6 +48,11 @@ class NetworkAPI {
     }
     
     func get(image url: URL, _ handler: @escaping (UIImage?) -> Void) {
+        
+        if let cached = self.imagesCache[url] {
+            handler(cached)
+            return
+        }
         
         let task = self.session.dataTask(with: url) { (data, response, error) in
             
