@@ -80,7 +80,11 @@ class RestaurantCell: UITableViewCell {
     }
     
     func setupView() {
-        self.contentView.backgroundColor = UIColor.white
+        if #available(iOS 13.0, *) {
+            self.contentView.backgroundColor = .systemBackground
+        } else {
+            self.contentView.backgroundColor = .white
+        }
         
         infoStack.addArrangedSubview(nameLabel)
         infoStack.addArrangedSubview(typeLabel)
@@ -97,8 +101,8 @@ class RestaurantCell: UITableViewCell {
             
             NSLayoutConstraint(item: mainStack, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 4),
             NSLayoutConstraint(item: mainStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: mainStack, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: mainStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 4),
+            NSLayoutConstraint(item: mainStack, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -4),
+            NSLayoutConstraint(item: mainStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 8),
         ])
     }
     

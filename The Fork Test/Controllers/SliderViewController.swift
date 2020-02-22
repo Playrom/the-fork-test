@@ -10,10 +10,13 @@ import UIKit
 
 class SliderViewController: UIPageViewController {
     
+    private let startSliderColor = UIColor.black
+    private let finalSliderColor = Style.theForkGreenColor
+    
     let opaqueLayerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Style.theForkGreenColor
+        view.backgroundColor = UIColor.black //Style.theForkGreenColor
         view.alpha = 0.35
         view.isUserInteractionEnabled = false
         return view
@@ -103,7 +106,32 @@ class SliderViewController: UIPageViewController {
         self.opaqueLayerView.alpha = CGFloat(0.35) + ( CGFloat(0.65) * CGFloat(percentage) )
         self.titleLabel.alpha = CGFloat(1) - CGFloat(percentage)
         self.pageControl.alpha = CGFloat(1) - CGFloat(percentage)
+        
+        let startSliderColorRed = startSliderColor.redValue
+        let startSliderColorGreen = startSliderColor.greenValue
+        let startSliderColorBlue = startSliderColor.blueValue
+        
+        let finalSliderColorRed = finalSliderColor.redValue
+        let finalSliderColorGreen = finalSliderColor.greenValue
+        let finalSliderColorBlue = finalSliderColor.blueValue
+        
+        let percentageFloat = CGFloat(percentage)
+        
+        let newRed = (1.0 - percentageFloat) * startSliderColorRed + percentageFloat * finalSliderColorRed
+        let newGreen = (1.0 - percentageFloat) * startSliderColorGreen + percentageFloat * finalSliderColorGreen
+        let newBlue = (1.0 - percentageFloat) * startSliderColorBlue + percentageFloat * finalSliderColorBlue
+        
+        let newColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+        self.opaqueLayerView.backgroundColor = newColor
+        
     }
+}
+
+extension UIColor {
+    var redValue: CGFloat{ return CIColor(color: self).red }
+    var greenValue: CGFloat{ return CIColor(color: self).green }
+    var blueValue: CGFloat{ return CIColor(color: self).blue }
+    var alphaValue: CGFloat{ return CIColor(color: self).alpha }
 }
 
 extension SliderViewController: UIPageViewControllerDelegate {

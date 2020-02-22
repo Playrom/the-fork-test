@@ -24,7 +24,12 @@ struct RestaurantData: Codable {
     let idSaleTypeNormal: Int
     let avgRate: Double
     let avgRateEvolution, rateDistinction: String?
-    let restaurantTags: RestaurantTags
+    private let _restaurantTags: RestaurantTags
+    var restaurantTags: [RestaurantTag] {
+        return _restaurantTags.values.map({
+            return RestaurantTag(dictionaryValues: $0)
+        })
+    }
     let highlightedTag: [HighlightedTag]
     let chefName: String?
     let menuExternalLink: URL?
@@ -83,7 +88,7 @@ struct RestaurantData: Codable {
         case avgRate = "avg_rate"
         case avgRateEvolution = "avg_rate_evolution"
         case rateDistinction = "rate_distinction"
-        case restaurantTags = "restaurant_tags"
+        case _restaurantTags = "restaurant_tags"
         case highlightedTag = "highlighted_tag"
         case chefName = "chef_name"
         case menuExternalLink = "menu_external_link"

@@ -6,3 +6,8 @@
   Copyright © 2020 Giorgio Romano. All rights reserved.
 */
 "Restaurants" = "Ristoranti";
+"0 votes" = "0 voti";
+"1 vote" = "1 voto";
+"params_votes" = "%@ voti";
+"avg_price" = "Prezzo medio %@";
+"accepts_cards" = "Accetta carte";

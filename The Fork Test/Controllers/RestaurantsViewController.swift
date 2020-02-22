@@ -23,17 +23,18 @@ class RestaurantsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
-        view.backgroundColor = UIColor.groupTableViewBackground
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = .systemGroupedBackground
+        } else {
+            self.view.backgroundColor = .groupTableViewBackground
+        }
         
         self.tableView.register(RestaurantCell.self, forCellReuseIdentifier: CellIdentifier.standard.rawValue)
         self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableView.automaticDimension
 
         self.navigationItem.title = NSLocalizedString("Restaurants", comment: "")
-        
-        if #available(iOS 11.0, *) {
-            self.navigationItem.largeTitleDisplayMode = .always
-        }
         
         self.downloadData()
     }
@@ -42,10 +43,6 @@ class RestaurantsViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = Style.Restaurants.tintColor
         self.navigationController?.navigationBar.barTintColor = Style.Restaurants.barTintColor
         self.navigationController?.navigationBar.backgroundColor = Style.Restaurants.backgroundColor
-        
-        if #available(iOS 11.0, *) {
-            self.navigationController?.navigationBar.prefersLargeTitles = Style.Restaurants.prefersLargeTitle
-        }
         
         if #available(iOS 13.0, *) {
             self.navigationController?.navigationBar.standardAppearance = Style.Restaurants.navBarAppearance
