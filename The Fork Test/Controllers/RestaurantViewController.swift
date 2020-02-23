@@ -62,8 +62,16 @@ class RestaurantViewController: UIViewController {
         return view
     }()
     
+    lazy var reserveView: ReserveView = {
+        let view = ReserveView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     internal let baseSliderHeight: CGFloat = 300
     fileprivate var sliderHeightConstraint: NSLayoutConstraint?
+    fileprivate var reserveViewBottomConstraint: NSLayoutConstraint?
+    fileprivate var reserveViewIsDisplayed = true
     
     var isFavourite: Bool = false
     let restaurant: RestaurantData
@@ -158,11 +166,14 @@ class RestaurantViewController: UIViewController {
         self.slider.didMove(toParent: self)
         
         self.view.addSubview(self.tableView)
+        self.view.addSubview(self.reserveView)
         
         
         if let sliderView = slider.view {
             
             sliderHeightConstraint = NSLayoutConstraint(item: sliderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: baseSliderHeight)
+            
+            reserveViewBottomConstraint = NSLayoutConstraint(item: reserveView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
             
             var constraints = [
                 NSLayoutConstraint(item: sliderView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0),
@@ -172,10 +183,19 @@ class RestaurantViewController: UIViewController {
                 NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: sliderView, attribute: .bottom, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
                 NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
+                NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0),
+                
+                NSLayoutConstraint(item: reserveView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: reserveView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0),
+                
+                reserveView.heightAnchor.constraint(equalToConstant: 130)
             ]
             
             if let constraint = sliderHeightConstraint {
+                constraints.append(constraint)
+            }
+            
+            if let constraint = reserveViewBottomConstraint {
                 constraints.append(constraint)
             }
             
@@ -221,6 +241,20 @@ extension RestaurantViewController: UITableViewDelegate {
         let percentage: Double = Double(correctedOffsetHeight) < 200 ? Double(correctedOffsetHeight) / 200 : 1.0
         self.titleLabel.alpha = CGFloat(percentage)
         self.slider.obfusced(percentage: percentage)
+        
+        if percentage == 1, reserveViewIsDisplayed {
+            self.reserveViewBottomConstraint?.constant = 300
+            reserveViewIsDisplayed = false
+            UIView.animate(withDuration: 0.8) {
+                self.view.layoutIfNeeded()
+            }
+        } else if percentage < 1, !reserveViewIsDisplayed {
+            self.reserveViewBottomConstraint?.constant = 0
+            reserveViewIsDisplayed = true
+            UIView.animate(withDuration: 0.8) {
+                self.view.layoutIfNeeded()
+            }
+        }
     }
 }
 
