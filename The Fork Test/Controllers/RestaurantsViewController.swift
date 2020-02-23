@@ -43,6 +43,7 @@ class RestaurantsViewController: UITableViewController {
         self.navigationController?.navigationBar.tintColor = Style.Restaurants.tintColor
         self.navigationController?.navigationBar.barTintColor = Style.Restaurants.barTintColor
         self.navigationController?.navigationBar.backgroundColor = Style.Restaurants.backgroundColor
+        self.navigationController?.navigationBar.barStyle = .black
         
         if #available(iOS 13.0, *) {
             self.navigationController?.navigationBar.standardAppearance = Style.Restaurants.navBarAppearance

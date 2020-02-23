@@ -23,7 +23,7 @@ class RestaurantCell: UITableViewCell {
         let view = UIImageView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 41.0
+//        view.layer.cornerRadius = 41.0
         view.layer.masksToBounds = true
         return view
     }()
@@ -70,6 +70,13 @@ class RestaurantCell: UITableViewCell {
         return view
     }()
     
+    let refreshView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.white)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.startAnimating()
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
@@ -94,15 +101,19 @@ class RestaurantCell: UITableViewCell {
         mainStack.addArrangedSubview(infoStack)
         
         self.contentView.addSubview(mainStack)
+        self.contentView.addSubview(self.refreshView)
         
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: avatarImageView, attribute: .height, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: avatarImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 92),
             
-            NSLayoutConstraint(item: mainStack, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 4),
+            NSLayoutConstraint(item: mainStack, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 8),
             NSLayoutConstraint(item: mainStack, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -8),
-            NSLayoutConstraint(item: mainStack, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -4),
+            NSLayoutConstraint(item: mainStack, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: -8),
             NSLayoutConstraint(item: mainStack, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 8),
+            
+            refreshView.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor),
+            refreshView.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor)
         ])
     }
     
@@ -112,9 +123,11 @@ class RestaurantCell: UITableViewCell {
         self.typeLabel.text = model.type
         self.ratingsLabel.text = model.ratings
         if let image = model.avatarImage {
+            refreshView.stopAnimating()
             self.avatarImageView.backgroundColor = .clear
             self.avatarImageView.image = image
         } else {
+            refreshView.startAnimating()
             self.avatarImageView.backgroundColor = .gray
             self.avatarImageView.image = nil
         }

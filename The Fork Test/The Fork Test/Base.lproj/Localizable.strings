@@ -11,3 +11,14 @@
 "params_votes" = "%@ votes";
 "avg_price" = "Average price %@";
 "accepts_cards" = "Accepts cards";
+"menu" = "MENU";
+"food_requirements" = "Food requirements";
+"read_menu" = "READ THE MENUS OR À LA CARTE";
+"read_reviews" = "READ REVIEWS";
+"notes_and_reviews" = "Notes and reviews";
+"based_on_zero_votes" = "based on 0 votes";
+"based_on_one_vote" = "based on 1 vote";
+"based_on_multiple_votes" = "based on %@ votes";
+"write_review" = "WRITE A REVIEW";
+"read_more" = "READ MORE";
+"reserve" = "RESERVE NOW • 20% DISCOUNT";

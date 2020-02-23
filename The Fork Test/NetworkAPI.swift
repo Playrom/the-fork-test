@@ -10,7 +10,7 @@ import UIKit
 
 class NetworkAPI {
     private let session: URLSession
-    private let imagesCache: [URL: UIImage] = [:]
+    private var imagesCache: [URL: UIImage] = [:]
     
     init() {
         self.session = URLSession.shared
@@ -63,6 +63,7 @@ class NetworkAPI {
             
             if let data = data, let image = UIImage(data: data) {
                 handler(image)
+                self.imagesCache[url] = image
             } else {
                 handler(nil)
             }

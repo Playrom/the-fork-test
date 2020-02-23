@@ -40,7 +40,7 @@ class RestaurantHeaderCell: UITableViewCell {
         if #available(iOS 13.0, *) {
             view.textColor = .secondaryLabel
         } else {
-            view.textColor = .black
+            view.textColor = .lightGray
         }
         
         view.numberOfLines = 0
@@ -68,7 +68,7 @@ class RestaurantHeaderCell: UITableViewCell {
         if #available(iOS 13.0, *) {
             view.textColor = .secondaryLabel
         } else {
-            view.textColor = .black
+            view.textColor = .lightGray
         }
         
         return view

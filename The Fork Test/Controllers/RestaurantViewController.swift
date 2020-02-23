@@ -12,6 +12,14 @@ class RestaurantViewController: UIViewController {
     
     enum CellIdentifier: String {
         case header
+        case menuItem
+        case optionalFood
+        case button
+        case vote
+        case rateDistinction
+        case writeReview
+        case tripadvisor
+        case reserve
     }
     
     lazy var slider: SliderViewController = {
@@ -45,9 +53,9 @@ class RestaurantViewController: UIViewController {
         view.font = .preferredFont(forTextStyle: .headline)
         
         if #available(iOS 13.0, *) {
-            view.textColor = .label
+            view.textColor = .white
         } else {
-            view.textColor = .black
+            view.textColor = .white
         }
         
         view.alpha = 0
@@ -55,11 +63,14 @@ class RestaurantViewController: UIViewController {
     }()
     
     internal let baseSliderHeight: CGFloat = 300
-    var sliderHeightConstraint: NSLayoutConstraint?
+    fileprivate var sliderHeightConstraint: NSLayoutConstraint?
     
     var isFavourite: Bool = false
-    
     let restaurant: RestaurantData
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     init(restaurant: RestaurantData) {
         self.restaurant = restaurant
@@ -79,11 +90,22 @@ class RestaurantViewController: UIViewController {
             self.view.backgroundColor = .groupTableViewBackground
         }
         
+        self.tableView.register(ButtonCell.self, forCellReuseIdentifier: CellIdentifier.button.rawValue)
         self.tableView.register(RestaurantHeaderCell.self, forCellReuseIdentifier: CellIdentifier.header.rawValue)
+        self.tableView.register(MenuItemCell.self, forCellReuseIdentifier: CellIdentifier.menuItem.rawValue)
+        self.tableView.register(OptionalFoodCell.self, forCellReuseIdentifier: CellIdentifier.optionalFood.rawValue)
+        self.tableView.register(VoteCell.self, forCellReuseIdentifier: CellIdentifier.vote.rawValue)
+        self.tableView.register(RateDistinctionCell.self, forCellReuseIdentifier: CellIdentifier.rateDistinction.rawValue)
+        self.tableView.register(WriteReviewCell.self, forCellReuseIdentifier: CellIdentifier.writeReview.rawValue)
+        self.tableView.register(TripadvisorCell.self, forCellReuseIdentifier: CellIdentifier.tripadvisor.rawValue)
+        self.tableView.register(ReserveButtonCell.self, forCellReuseIdentifier: CellIdentifier.reserve.rawValue)
+        
+        
         self.tableView.estimatedRowHeight = 100.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.separatorStyle = .none
         
+        self.navigationController?.navigationBar.barStyle = .black
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithTransparentBackground()
@@ -180,16 +202,17 @@ class RestaurantViewController: UIViewController {
 extension RestaurantViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetHeight = scrollView.contentOffset.y
-        let correctedOffsetHeight = offsetHeight / 4
+        let correctedOffsetHeight = offsetHeight
         let newSliderHeight: CGFloat
         
         var totalMinimumSliderHeight = self.navigationController?.navigationBar.frame.size.height ?? 0
         let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) : UIApplication.shared.statusBarFrame.height
         totalMinimumSliderHeight = totalMinimumSliderHeight + statusBarHeight
         
-        if correctedOffsetHeight < 200 {
-            let calcHeigth = baseSliderHeight - correctedOffsetHeight
-            newSliderHeight = calcHeigth > totalMinimumSliderHeight ? calcHeigth : totalMinimumSliderHeight
+        let calcHeigth = baseSliderHeight - correctedOffsetHeight
+        
+        if calcHeigth > totalMinimumSliderHeight {
+            newSliderHeight = calcHeigth
         } else {
             newSliderHeight = totalMinimumSliderHeight
         }
@@ -204,14 +227,92 @@ extension RestaurantViewController: UITableViewDelegate {
 extension RestaurantViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 90
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return self.restaurant.restaurantTags.first(where: {$0.id == 8}) != nil ? restaurant.cardMenu.count + 2 : restaurant.cardMenu.count + 1
+        case 2:
+            return 6
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            return self.generateRestaurantHeaderCell(indexPath: indexPath)
+        case 1:
+            if let tag = self.restaurant.restaurantTags.first(where: {$0.id == 8}) {
+                if indexPath.row == self.restaurant.cardMenu.endIndex + 1 {
+                    return self.generateReadMenuCell(indexPath: indexPath)
+                } else if indexPath.row == self.restaurant.cardMenu.endIndex {
+                    return self.generateOptionalFoodCell(indexPath: indexPath, with: tag)
+                } else {
+                    return self.generateMenuItemCell(indexPath: indexPath)
+                }
+            } else {
+                if indexPath.row == self.restaurant.cardMenu.endIndex  {
+                    return self.generateReadMenuCell(indexPath: indexPath)
+                } else {
+                    return self.generateMenuItemCell(indexPath: indexPath)
+                }
+            }
+        case 2:
+            switch indexPath.row {
+            case 0:
+                return self.generateVoteCell(indexPath: indexPath)
+            case 1:
+                return self.generateRateDistinctionCell(indexPath: indexPath)
+            case 2:
+                return self.generateReadReviewsCell(indexPath: indexPath)
+            case 3:
+                return self.generateWriteReviewCell(indexPath: indexPath)
+            case 4:
+                return self.generateTripadvisorCell(indexPath: indexPath)
+            case 5:
+                return self.generateReserveCell(indexPath: indexPath)
+            default:
+                break
+            }
+            
+        default:
+            break
+        }
+        return UITableViewCell()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 1:
+            let headerView = HeaderView()
+            headerView.setup(with: NSLocalizedString("menu", comment: ""))
+            return headerView
+        case 2:
+            let headerView = HeaderView()
+            headerView.setup(with: NSLocalizedString("notes_and_reviews", comment: ""))
+            return headerView
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return 0
+        default:
+            return UITableView.automaticDimension
+        }
+    }
+    
+    private func generateRestaurantHeaderCell(indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.header.rawValue, for: indexPath) as? RestaurantHeaderCell else {
             return UITableViewCell()
         }
@@ -248,5 +349,92 @@ extension RestaurantViewController: UITableViewDataSource {
         return cell
     }
     
+    private func generateMenuItemCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.menuItem.rawValue, for: indexPath) as? MenuItemCell else {
+            return UITableViewCell()
+        }
+        
+        let menuItem = self.restaurant.cardMenu[indexPath.row]
+        
+        cell.setup(with: MenuItemCell.ViewModel(name: menuItem.name, price: menuItem.price, currencyCode: restaurant.currencyCode))
+        
+        return cell
+    }
+    
+    private func generateOptionalFoodCell(indexPath: IndexPath, with tag: RestaurantTag) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.optionalFood.rawValue, for: indexPath) as? OptionalFoodCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: tag.tagList.map({$0.tagName}))
+        
+        return cell
+    }
+    
+    private func generateReadMenuCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.button.rawValue, for: indexPath) as? ButtonCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: .readMenu)
+        
+        return cell
+    }
+    
+    private func generateVoteCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.vote.rawValue, for: indexPath) as? VoteCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: self.restaurant.avgRate)
+        
+        return cell
+    }
+    
+    private func generateRateDistinctionCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.rateDistinction.rawValue, for: indexPath) as? RateDistinctionCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: RateDistinctionCell.ViewModel(rateDistinction: restaurant.rateDistinction ?? "", reviewCount: restaurant.rateCount))
+        
+        return cell
+    }
+    
+    private func generateReadReviewsCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.button.rawValue, for: indexPath) as? ButtonCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: .readReviews)
+        
+        return cell
+    }
+    
+    private func generateWriteReviewCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.writeReview.rawValue, for: indexPath) as? WriteReviewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+    private func generateTripadvisorCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.tripadvisor.rawValue, for: indexPath) as? TripadvisorCell else {
+            return UITableViewCell()
+        }
+        
+        cell.setup(with: TripadvisorCell.ViewModel(bubbles: self.restaurant.tripAdvisorAvgRating, reviewCount: self.restaurant.tripAdvisorReviewCount))
+        
+        return cell
+    }
+    
+    private func generateReserveCell(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.reserve.rawValue, for: indexPath) as? ReserveButtonCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
     
 }

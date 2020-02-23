@@ -1,5 +1,18 @@
 import Foundation
 
+struct MenuItem: Codable {
+    
+    enum ItemType: String, Codable {
+        case main
+        case start
+        case dessert
+    }
+    
+    var type: ItemType
+    var name: String
+    var price: Double?
+}
+
 struct RestaurantData: Codable {
     let idRestaurant: Int
     let restaurantUUID, name: String
@@ -40,15 +53,62 @@ struct RestaurantData: Codable {
     let otherLocalizationInfos: String?
     let nbMaxGroup: Int
     let insiderDescription, insiderTips: String? // JSONNull?
-    let cardStart1, cardStart2, cardStart3, cardMain1: String?
-    let cardMain2, cardMain3, cardDessert1, cardDessert2,  cardDessert3: String?
+    
+    var cardMenu: [MenuItem] {
+        var menu = [MenuItem]()
+        
+        if let cardStart1 = cardStart1 {
+            menu.append(MenuItem(type: .start, name: cardStart1, price: priceCardStart1))
+        }
+        
+        if let cardStart2 = cardStart2 {
+            menu.append(MenuItem(type: .start, name: cardStart2, price: priceCardStart2))
+        }
+        
+        if let cardStart3 = cardStart3 {
+            menu.append(MenuItem(type: .start, name: cardStart3, price: priceCardStart3))
+        }
+        
+        if let cardMain1 = cardMain1 {
+            menu.append(MenuItem(type: .start, name: cardMain1, price: priceCardMain1))
+        }
+        
+        if let cardMain2 = cardMain2 {
+            menu.append(MenuItem(type: .start, name: cardMain2, price: priceCardMain2))
+        }
+        
+        if let cardMain3 = cardMain3 {
+            menu.append(MenuItem(type: .start, name: cardMain3, price: priceCardMain3))
+        }
+        
+        if let cardDessert1 = cardDessert1 {
+            menu.append(MenuItem(type: .start, name: cardDessert1, price: priceCardDessert1))
+        }
+        
+        if let cardDessert2 = cardDessert2 {
+            menu.append(MenuItem(type: .start, name: cardDessert2, price: priceCardDessert2))
+        }
+        
+        if let cardDessert3 = cardDessert3 {
+            menu.append(MenuItem(type: .start, name: cardDessert3, price: priceCardDessert3))
+        }
+        
+        return menu
+    }
+    
+    private let cardStart1, cardStart2, cardStart3, cardMain1: String?
+    private let cardMain2, cardMain3, cardDessert1, cardDessert2,  cardDessert3: String?
+    private let priceCardMain1, priceCardMain2, priceCardMain3: Double?
+    private let priceCardStart1, priceCardStart2, priceCardStart3: Double?
+    private let priceCardDessert1, priceCardDessert2, priceCardDessert3: Double?
     let priceHalfBottleOfMineralWater, priceBottleOfMineralWater, priceBottleOfWineMax, priceBottleOfWineMin: Int?
     let priceOfCoffee: Int?
     let ratings: Ratings
     let menus: Menus
     let yumsDetail: YumsDetail
     let michelinDetail: MichelinDetail
-    let tripAdvisorAvgRating, tripAdvisorReviewCount, hasStock, isOpened: Int
+    let tripAdvisorAvgRating: Double
+    let tripAdvisorReviewCount, hasStock, isOpened: Int
 
     enum CodingKeys: String, CodingKey {
         case idRestaurant = "id_restaurant"
@@ -108,6 +168,15 @@ struct RestaurantData: Codable {
         case cardDessert1 = "card_dessert_1"
         case cardDessert2 = "card_dessert_2"
         case cardDessert3 = "card_dessert_3"
+        case priceCardStart1 = "price_card_start_1"
+        case priceCardStart2 = "price_card_start_2"
+        case priceCardStart3 = "price_card_start_3"
+        case priceCardMain1 = "price_card_main_1"
+        case priceCardMain2 = "price_card_main_2"
+        case priceCardMain3 = "price_card_main_3"
+        case priceCardDessert1 = "price_card_dessert_1"
+        case priceCardDessert2 = "price_card_dessert_2"
+        case priceCardDessert3 = "price_card_dessert_3"
         case priceHalfBottleOfMineralWater = "price_half_bottle_of_mineral_water"
         case priceBottleOfMineralWater = "price_bottle_of_mineral_water"
         case priceBottleOfWineMax = "price_bottle_of_wine_max"

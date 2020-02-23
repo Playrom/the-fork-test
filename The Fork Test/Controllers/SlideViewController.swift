@@ -12,7 +12,12 @@ class SlideViewController: UIViewController {
     
     var image: UIImage? {
         didSet {
-            imageView.image = self.image
+            if let img = image {
+                self.imageView.image = img
+                refreshView.stopAnimating()
+            } else {
+                refreshView.startAnimating()
+            }
         }
     }
     
@@ -33,6 +38,13 @@ class SlideViewController: UIViewController {
         return view
     }()
     
+    let refreshView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.startAnimating()
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setup()
@@ -40,12 +52,16 @@ class SlideViewController: UIViewController {
     
     func setup() {
         self.view.addSubview(self.imageView)
+        self.view.addSubview(self.refreshView)
         
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: imageView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0)
+            NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0),
+            
+            refreshView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            refreshView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
     }
 }

@@ -11,3 +11,14 @@
 "params_votes" = "%@ voti";
 "avg_price" = "Prezzo medio %@";
 "accepts_cards" = "Accetta carte";
+"menu" = "MENU";
+"food_requirements" = "Esigenze alimentari";
+"read_menu" = "VEDI I MENU FISSI O À LA CARTE";
+"read_reviews" = "LEGGI LE RECENSIONI";
+"notes_and_reviews" = "Note e recensioni";
+"based_on_zero_votes" = "basato su 0 voti";
+"based_on_one_vote" = "basato su 1 voto";
+"based_on_multiple_votes" = "basatao su %@ voti";
+"write_review" = "SCRIVI UNA RECENSIONE";
+"read_more" = "LEGGI TUTTO";
+"reserve" = "PRENOTA ORA • SCONTO 20%";

@@ -10,13 +10,13 @@ import UIKit
 
 class SliderViewController: UIPageViewController {
     
-    private let startSliderColor = UIColor.black
-    private let finalSliderColor = Style.theForkGreenColor
+    private let startSliderColor = UIColor.black.withAlphaComponent(0.35)
+    private let finalSliderColor = Style.theForkGreenColor.withAlphaComponent(1.0)
     
-    let opaqueLayerView: UIView = {
+    lazy var opaqueLayerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.black //Style.theForkGreenColor
+        view.backgroundColor = startSliderColor
         view.alpha = 0.35
         view.isUserInteractionEnabled = false
         return view
@@ -110,18 +110,21 @@ class SliderViewController: UIPageViewController {
         let startSliderColorRed = startSliderColor.redValue
         let startSliderColorGreen = startSliderColor.greenValue
         let startSliderColorBlue = startSliderColor.blueValue
+        let startSliderColorAlpha = startSliderColor.alphaValue
         
         let finalSliderColorRed = finalSliderColor.redValue
         let finalSliderColorGreen = finalSliderColor.greenValue
         let finalSliderColorBlue = finalSliderColor.blueValue
+        let finalSliderColorAlpha = finalSliderColor.alphaValue
         
         let percentageFloat = CGFloat(percentage)
         
         let newRed = (1.0 - percentageFloat) * startSliderColorRed + percentageFloat * finalSliderColorRed
         let newGreen = (1.0 - percentageFloat) * startSliderColorGreen + percentageFloat * finalSliderColorGreen
         let newBlue = (1.0 - percentageFloat) * startSliderColorBlue + percentageFloat * finalSliderColorBlue
+        let newAlpha = (1.0 - percentageFloat) * startSliderColorAlpha + percentageFloat * finalSliderColorAlpha
         
-        let newColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+        let newColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: newAlpha)
         self.opaqueLayerView.backgroundColor = newColor
         
     }
