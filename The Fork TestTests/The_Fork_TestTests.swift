@@ -18,17 +18,43 @@ class The_Fork_TestTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testWrongNumberRestaurantNetworkRequest() {
+        let api = NetworkAPI()
+        let expectation = XCTestExpectation(description: "Download from thefork api")
+        api.get(restaurant: Int.max) {
+            restaurant in
+            XCTAssertNil(restaurant)
+            expectation.fulfill()
         }
+        wait(for: [expectation], timeout: 20)
     }
+    
+    func testCorrectRestaurantNetworkRequest() {
+        let api = NetworkAPI()
+        let expectation = XCTestExpectation(description: "Download from thefork api")
+        api.get(restaurant: 6861) {
+            restaurant in
+            XCTAssertNotNil(restaurant)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 20)
+    }
+    
+    func testCorrectParseRestaurantNetworkRequest() {
+        let api = NetworkAPI()
+        let expectation = XCTestExpectation(description: "Download from thefork api")
+        api.get(restaurant: 6861) {
+            restaurant in
+            guard let restaurant = restaurant else {
+                XCTFail()
+                expectation.fulfill()
+                return
+            }
+            XCTAssert(restaurant.data.idRestaurant == 6861 && restaurant.data.rateDistinction == "Excellente table")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 20)
+   }
 
 }

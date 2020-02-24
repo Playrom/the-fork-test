@@ -102,6 +102,7 @@ class SliderViewController: UIPageViewController {
 
     }
     
+    // During the scroll of the main tableview this method is called, in order to progressive reduce the alpha of the image and all the controls of the slider, and changing the layer color to the fork green to simulate a UINavigationItem background color
     func obfusced(percentage: Double) {
         self.opaqueLayerView.alpha = CGFloat(0.35) + ( CGFloat(0.65) * CGFloat(percentage) )
         self.titleLabel.alpha = CGFloat(1) - CGFloat(percentage)
@@ -130,15 +131,10 @@ class SliderViewController: UIPageViewController {
     }
 }
 
-extension UIColor {
-    var redValue: CGFloat{ return CIColor(color: self).red }
-    var greenValue: CGFloat{ return CIColor(color: self).green }
-    var blueValue: CGFloat{ return CIColor(color: self).blue }
-    var alphaValue: CGFloat{ return CIColor(color: self).alpha }
-}
-
 extension SliderViewController: UIPageViewControllerDelegate {
     
+    
+    // I'm using a custom page control to customize its position in the view, so i need to change it's index when a slide is changed
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
         guard let vc = pageViewController.viewControllers?.first as? SlideViewController else { return }

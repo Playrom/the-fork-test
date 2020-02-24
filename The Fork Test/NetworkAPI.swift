@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// This class is a wrapper of the URLSession api, use it to download restaurant json or images
 class NetworkAPI {
     private let session: URLSession
     private var imagesCache: [URL: UIImage] = [:]

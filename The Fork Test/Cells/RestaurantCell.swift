@@ -23,7 +23,6 @@ class RestaurantCell: UITableViewCell {
         let view = UIImageView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFill
-//        view.layer.cornerRadius = 41.0
         view.layer.masksToBounds = true
         return view
     }()
