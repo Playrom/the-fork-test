@@ -50,13 +50,7 @@ class RestaurantViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.font = .preferredFont(forTextStyle: .headline)
-        
-        if #available(iOS 13.0, *) {
-            view.textColor = .white
-        } else {
-            view.textColor = .white
-        }
-        
+        view.textColor = .white
         view.alpha = 0
         return view
     }()

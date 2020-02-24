@@ -107,7 +107,7 @@ class ReserveView: UIView {
     
     func setupView() {
         self.addSubview(button)
-        
+        self.backgroundColor = .clear
         
         if #available(iOS 11.0, *) {
             NSLayoutConstraint.activate([
@@ -132,7 +132,7 @@ class ReserveView: UIView {
         super.layoutSublayers(of: layer)
         gradient.frame = self.bounds
     }
-
+    
     override public func draw(_ rect: CGRect) {
         gradient.frame = self.bounds
         gradient.colors = [gradientEndColor.cgColor, gradientStartColor.cgColor]

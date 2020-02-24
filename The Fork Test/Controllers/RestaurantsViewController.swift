@@ -14,6 +14,8 @@ class RestaurantsViewController: UITableViewController {
         case standard
     }
     
+    private let refresherControl = UIRefreshControl()
+    
     var restaurants: [RestaurantData] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -23,6 +25,12 @@ class RestaurantsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNeedsStatusBarAppearanceUpdate()
+        
+        if #available(iOS 10.0, *) {
+            tableView.refreshControl = refresherControl
+        } else {
+            tableView.addSubview(refresherControl)
+        }
         
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = .systemGroupedBackground
